@@ -1,0 +1,36 @@
+{
+    "Promos": [
+      {
+        "PromoId": "3535",
+        "PromoName": "Home Boost 15",
+        "Price": "15",
+        "PromoDescription": "Enjoy 1GB of data, valid for 1 day.",
+        "GroupId": "573",
+        "IsPromoRecurring": "False",
+        "RecurringPromoId": "NA",
+        "Spiel": ""
+      },
+      {
+        "PromoId": "3531",
+        "PromoName": "Home Boost 50",
+        "Price": "50",
+        "PromoDescription": "Enjoy 1GB of data and 300MB for Youtube, Spinnr, Vimeo valid for 3 days.",
+        "GroupId": "557",
+        "IsPromoRecurring": "False",
+        "RecurringPromoId": "NA",
+        "Spiel": ""
+      },
+      {
+        "PromoId": "3532",
+        "PromoName": "Home Boost 100",
+        "Price": "100",
+        "PromoDescription": "Enjoy 3GB of data, valid for 1 day.",
+        "GroupId": "573",
+        "IsPromoRecurring": "False",
+        "RecurringPromoId": "NA",
+        "Spiel": ""
+      }
+    ],
+    "Code": "0",
+    "Message": "Success"
+  }

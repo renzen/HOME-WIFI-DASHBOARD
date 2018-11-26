@@ -1,0 +1,75 @@
+ .center{margin:0 auto;text-align: center; display: table}
+ .addons.row {
+    margin: 0px 0 25px 0;
+    border-bottom: 1px solid #eae3e3;
+}
+
+ #btnSubscribe{
+    padding: 5px 10px;
+    background-color: #d2272a;
+    border-radius: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    width: 100px;
+    border: 0;
+}
+
+ .addons-container p {
+    min-height: 40px;
+}
+
+ #btnSubscribe:hover{
+    background-color:#a00c0f;
+}
+
+ li.col-xs-12.featured-promos {
+    list-style: none;
+}
+    
+ul{margin: 0;padding:0}
+
+.inner .promo li {
+    width: 33%;
+    float: left;
+    margin: 1px;
+    padding: 10px;
+    list-style: none;
+}
+
+ .name.col {
+    text-align: center;
+}
+
+ .modal-header, .modal-footer {
+    border: 0;
+}
+
+ ul.promo {
+    text-align: center;
+}
+
+.promo .title{
+    color: #d2272a;
+    padding: 10px;
+    word-break: break-all;
+    background-color: #dbdbdb;
+}
+
+.AllAddOns ul li div{
+    margin-bottom: 15px;
+}
+.promo .price{color: #d2272a;
+    text-align: center;
+    display: block;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 20px; }
+
+.price.col-2, .button.col-2 {
+        text-align: center;
+}
+
+
+
+
+
