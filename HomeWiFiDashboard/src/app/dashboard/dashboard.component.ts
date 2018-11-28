@@ -18,11 +18,13 @@ export class DashboardComponent implements OnInit {
 
     @Input() addOn$: any;
     @Input() promos$: any;
+    @Input() accountBal$: any;
     loading = false;
     buyAddOns: boolean = false;
     listAddOns: boolean = false;
     loadBalance: boolean;
     clickMessage = '';
+    mobileNo: any;
 
     private buyAddOn: BuyAddOn;
     private availments: Availments;
@@ -90,6 +92,22 @@ export class DashboardComponent implements OnInit {
                 this.promos$ = data
                 console.log("I got", data)
             })
+
+            this.data.GetPostpaidAccount('09987970001').subscribe(
+                data => {
+                    this.accountBal$ = data
+                    console.log("I got", data)
+                    if(data){
+                        this.data.GetPostpaidBalance(this.accountBal$.AccountNo).subscribe(data => {
+                            console.log("I got Postpaid Balance", data)
+                        })
+                    }
+                    
+                    
+                })
+
+
+        
         
     }
 

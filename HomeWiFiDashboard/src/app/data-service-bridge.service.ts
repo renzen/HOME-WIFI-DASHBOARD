@@ -13,15 +13,19 @@ import { map } from 'rxjs/operators';
 
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-  })
-};
+
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//       'Content-Type': 'application/json'
+//   })
+// };
+
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataServiceBridgeService {
 
   mobileNo: number;
@@ -29,10 +33,12 @@ export class DataServiceBridgeService {
   userCode: number;
   channel: string;
  
+  _token = 'RiHdHENVs9wA9G10oNj04pz56lJOblywY2o0wCjRmJO3/J2OS4uBvhFQXYjqO/cKuJbbsZrAOvyxwBI8MNcRipdbt/bVKMVWnQnStE9SfD9uNiLrfthEAKy/t4SpaTe9Qqcy5PZPKJeE/5i4Kz7//paTHDOAe/kf1OPbQHupnL3WPDUBisNFSPQwunZf7+4vfuauUko1oBmJep0GOYA00A==';
+  _clientId = 13323;
+  _urlWallet = 'https://www.pldt.com.ph/mobility/dev/pldthome/api/smartbridge/CSP/DashboardService.svc/rest/InquireWallets/1';
+  _urlWalletEnd = '/1/GSM/S000000HOME/0';
 
-  
-
-constructor(private http: HttpClient, private messageService: MessageService) { }
+constructor(private http: HttpClient, private messageService: MessageService, private http1: Http) { }
 
 // private _productURL = 'http://localhost:3000/Addons'; // nodeAPI
 
@@ -58,20 +64,60 @@ GetPromos(): Observable<any> {
   catchError(this.handleError<any>('GetPromos')));
 }
 
-BuyAddOns(model: BuyAddOn): Observable<any> {
-  return this.http.post('http://stg-uhwws.intra.smart:5200/HomeWifiLoadAPIWS/api/RegisterPackage?mobileNo={0}&brand={1}&promoId={2}&uregChannel={3}&dpUsername={4}&dpPassword={5}&channel={6}', model)
-}
 
-GetPostpaidBalance(userId){
-  return this.http.get('http://stg-uhwws.intra.smart:5200/HomeWifiLoadAPIWS/api/GetPostpaidBalance?mobileNo={1}&msaId={2}&brandType={3}&balancePage={4}&channel={5}'+ userId).pipe(
-    tap(_ => this.log(`get user id = ${userId}`)),
+GetPostpaidAccount(mobileNo): Observable<any> {
+  return this.http.get('https://www.pldt.com.ph/mobility/dev/pldthome/api/smartbridge/PLDTKenan/PLDTKenanService.svc/rest/GetAccountBalanceByService/' + mobileNo + '/0').pipe(
+    tap(_ => this.log(`get user id = ${mobileNo}`)),
     catchError(this.handleError<any>('GetPostpaidBalance')));
 }
+
+GetPostpaidBalance(AccountNo): Observable<any> {
+
+
+  var httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 
+    'X-Pldt-Auth-Token': `${this._token}`,
+    'X-Pldt-Client-Id': `${this._clientId}`})
+    .set('Access-Control-Allow-Origin', '*')
+    }; 
+
+  // let headers = new HttpHeaders ();
+  // headers.append('X-Pldt-Auth-Token','RiHdHENVs9wA9G10oNj04pz56lJOblywY2o0wCjRmJO3/J2OS4uBvhFQXYjqO/cKuJbbsZrAOvyxwBI8MNcRipdbt/bVKMVWnQnStE9SfD9uNiLrfthEAKy/t4SpaTe9Qqcy5PZPKJeE/5i4Kz7//paTHDOAe/kf1OPbQHupnL3WPDUBisNFSPQwunZf7+4vfuauUko1oBmJep0GOYA00A== ')
+  // headers.append('X-Pldt-Client-Id','13323')
+  // let headers = new HttpHeaders();
+  // headers = headers.set('X-Pldt-Auth-Token', 'RiHdHENVs9wA9G10oNj04pz56lJOblywY2o0wCjRmJO3/J2OS4uBvhFQXYjqO/cKuJbbsZrAOvyxwBI8MNcRipdbt/bVKMVWnQnStE9SfD9uNiLrfthEAKy/t4SpaTe9Qqcy5PZPKJeE/5i4Kz7//paTHDOAe/kf1OPbQHupnL3WPDUBisNFSPQwunZf7+4vfuauUko1oBmJep0GOYA00A== ').set('X-Pldt-Client-Id','13323');
+
+  console.log(httpOptions);
+  // return this.http.get('https://www.pldt.com.ph/mobility/dev/pldthome/api/smartbridge/CSP/DashboardService.svc/rest/InquireWallets/1' + AccountNo + '/1/GSM/S000000HOME/0',{ headers: headers }).pipe(
+  //   tap(_ => this.log(`get user id = ${AccountNo}`)),
+  //   catchError(this.handleError<any>('GetPostpaidBalance')));
+
+  // const headers = new Headers({
+  //   // 'Content-Type': 'application/json',
+  //   'Authorization': 'RiHdHENVs9wA9G10oNj04pz56lJOblywY2o0wCjRmJO3/J2OS4uBvhFQXYjqO/cKuJbbsZrAOvyxwBI8MNcRipdbt/bVKMVWnQnStE9SfD9uNiLrfthEAKy/t4SpaTe9Qqcy5PZPKJeE/5i4Kz7//paTHDOAe/kf1OPbQHupnL3WPDUBisNFSPQwunZf7+4vfuauUko1oBmJep0GOYA00A=='
+  // })
+  return this.http.get(`${this._urlWallet}` + AccountNo + `${this._urlWalletEnd}`,
+   httpOptions)
+
+}
+
+
+
 
 GetAvailments(model: Availments): Observable<any> {
   return this.http.post('http://stg-uhwws.intra.smart:5200/HomeWifiLoadAPIWS/api/GetAvailments?mobileNo={1}&brand={2}&promoType={3}&uregChannel={4}&dpUsername={5}&dpPassword={6}&topPromos={7}&allPromos={8}&channel={9}', model)
 }
 
+
+//add
+BuyAddOns(model: BuyAddOn): Observable<any> {
+  return this.http.post('http://stg-uhwws.intra.smart:5200/HomeWifiLoadAPIWS/api/RegisterPackage?mobileNo={0}&brand={1}&promoId={2}&uregChannel={3}&dpUsername={4}&dpPassword={5}&channel={6}', model)
+}
+
+// http://stg-uhwws.intra.smart:5200/HomeWifiLoadAPIWS/api/GetPostpaidBalance?mobileNo={1}&msaId={2}&brandType={3}&balancePage={4}&channel={5}
+
+// http://pldtiwsdev01:8001/PLDTServiceBridge/Modules/PLDTKenan/PLDTKenanService.svc/rest/GetAccountBalanceByService/09987970001/0 
+// http://pldtiwsdev02:8001/PLDTServiceBridge/Modules/CSP/DashboardService.svc/rest/InquireWallets/10247402586/1/GSM/S000000HOME/myHome 
 
 
 //Success handler

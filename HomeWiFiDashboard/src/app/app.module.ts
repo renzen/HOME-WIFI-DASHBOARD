@@ -8,6 +8,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { DataServiceBridgeService } from './data-service-bridge.service';
+import { HttpModule } from '@angular/http';
+
 
 //Apps roots / HashLocationStrategy
 const appRoots = [
@@ -26,6 +28,7 @@ const appRoots = [
     RouterModule.forRoot(appRoots),
     NgbModule.forRoot(),
     HttpClientModule,
+    HttpModule,
   ],
   providers: [DataServiceBridgeService],
   bootstrap: [AppComponent]
