@@ -1,0 +1,206 @@
+<div class="header container">
+    <div class="row">
+      <div class="logo col-xs-12">
+        <img src="./assets/images/pldt-logo-white.png" alt="PLDT Logo">
+      </div>
+    </div>
+  </div>
+  
+  
+      <div class="container">  
+    <div id="row">
+  
+        <div class="row">
+            <div class="col-sm-4"><img src="./assets/images/PLDTModem.png" style="width:380px"></div>
+            <div class="col-sm-8">
+                  <div class="mx-auto">
+                         &nbsp;
+                  </div>
+                  <div class="mx-auto">
+                          &nbsp;
+                  </div>
+                <div class="account-min">
+                    <h4>
+                      Hi, 
+                      <strong>{{ accountBal$.MIN }}</strong>
+                        <!-- <p *ngFor="let number of accountBal$.Wallets">
+                           <strong>{{ number.MIN }}</strong>
+                        </p> -->
+                    
+                    </h4>
+                  </div>
+                
+                  <div class="header-spiel">
+                      <h2>Welcome to the Home WiFi dashboard.</h2>
+                      <p>Manage your PLDT Home WiFi account while on the go monitor your usage, subscribe to latest promos, get the latest updates and more.</p>
+                    </div>
+  
+                    <div *ngIf="viewbalance" id="view-balance">
+                        <p>Click  
+                            <!-- <a id="link-balance" (onclick)="CallLoadPartial()">here</a> -->
+                            <a id="link-balance" href="#" (click)="CallLoadPartial()">here</a> 
+                             to view your current balance.</p>
+                              </div>
+                              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                   <br>
+                    <div *ngIf="loadBalance">
+                        <!-- <ul>
+                            <li *ngFor="let promo of accountBal$.Wallets"> -->
+                        <div class="balance">
+                            <div class="row prepaid">
+                                <div class="col-xs-12 col-sm-6 b-label">
+                                    <p>WALLET NAME</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 b-value">
+                                    <p class="value">{{ accountBal$.WalletName }}</p>
+                                </div>
+                            </div>
+                            <div class="row prepaid">
+                                <div class="col-xs-12 col-sm-6 b-label">
+                                    <p>LOAD BALANCE</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 b-value">
+                                    <p class="value">{{ accountBal$.Balance | currency:'P' }}</p>
+                                </div>
+                            </div>
+                            <div class="row prepaid">
+                                <div class="col-xs-12 col-sm-6 b-label">
+                                    <p>DATA BALANCE</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 b-value">
+                                    <p class="value">{{ accountBal$.UOM }}</p>
+                                </div>
+                            </div>
+                            <div class="row prepaid">
+                                <div class="col-xs-12 col-sm-6 b-label">
+                                    <p>EXPIRY DATE</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 b-value">
+                                    <p class="value">{{ accountBal$.ExpiryDate }}</p>
+                                    <strong>{{ accountBal$.MIN }}</strong>
+                                </div>
+                            </div>
+                    </div>
+                  <!-- </li>  
+
+                </ul> -->
+                            <a id="link-balance" href="#" (click)="CloseLoadPartial()">Close</a> 
+                        </div>
+
+                        <br> <br>
+                  
+                <div class="row">
+                    <div class="col-sm">
+                      
+                        <div class="inner">
+                            
+                            <div>
+                                    <ul class="promo">
+                                      <li *ngFor="let promo of promos$">
+                                            <div class="title">
+                                       <h4>{{ promo.promoname }}</h4> 
+                                       </div>
+                                       <div class="price">
+                                        <p>P{{ promo.price }}.00</p>
+                                        </div>
+                                        <div class="desc">
+                                        <p>{{ promo.promoDescription }}</p>
+                                        </div>
+                                        <div class="button">
+                                            <input class="btn blue" type="button" value="Buy" id="btnSubscribe" name="" data-toggle="modal" (click)="openBuyPromo(content, promo.promoname)">
+                                        </div>
+                                        </li>
+                                    </ul>
+                                   
+                                  
+                                  </div>
+                            
+                            <div class="validity">
+                                <!-- <p>Valid for 12 days</p> -->
+                            </div>
+                        </div>
+                   
+                    </div>
+                  </div>
+
+
+                  
+                  <div class="mx-auto">
+                          &nbsp;
+                   </div>
+                   <div class="mx-auto">
+                           &nbsp;
+                   </div>
+                   <br>
+                  <div class="col-xs-12">
+                      <!-- <button type="button" class="btn btn-primary center" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="openaddOns()">
+                          View all add-ons here</button> -->
+                          <button class="btn btn-outline-primary center" (click)="openLg(content)">View all add-ons here</button>
+
+                          
+                    </div>
+                  
+            </div>
+
+            
+
+  <!--modal buyPromo-->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="listAddOns">All Add-ons</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body AllAddOns">
+        <div *ngIf="buyAddOns">
+                <p class= "confirmMessage">You are about to get plan {{clickMessage}}</p>   
+    
+        </div>    
+  <ul *ngIf="listAddOns">
+    <li *ngFor="let promo of addOn$" class="col-xs-12 featured-promos">
+            <div class="row">
+            <div class="name col-3"> 
+      <p>{{ promo.addOnName }}</p>
+             </div>
+             <div class="price col-2"> 
+      <p>{{ promo.price }}</p>
+      </div>
+      <div class="description col-5"> 
+      <p>{{ promo.promoDescription }}</p>
+      </div>
+      <div class="button col-2"> 
+      <input _ngcontent-c1="" class="btn blue confirmBtn" data-toggle="modal" id="btnSubscribe" name="" type="button" value="Buy" (click)="buyAlladd(AllAdd, promo.addOnName)">
+      </div>
+      </div>
+    </li>
+  </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="btnSubscribe" class="btn btn-outline-dark" (click)="c('Save click')" *ngIf="buyAddOns">Confirm</button>
+    </div>
+  </ng-template>
+  <!--modal buyPromo-->
+
+    <!--modal buyPromo-->
+    <ng-template #AllAdd let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" *ngIf="addOnHeader">All Add-ons</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                        <p>You are about to get plan {{clickMessage}}</p>     
+                </div>    
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="btnSubscribe" class="btn btn-outline-dark" (click)="c('Save click')">Confirm</button>
+            </div>
+          </ng-template>
+    <!--modal buyPromo-->
+
+
+          </div>
+      </div>

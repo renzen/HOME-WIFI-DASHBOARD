@@ -1,0 +1,11 @@
+{
+    "/api": {
+         "target": "https://www.pldt.com.ph/mobility/dev/pldthome/api/smartbridge/CSP/DashboardService.svc",
+        "secure": false,
+        "logLevel": "debug",
+    "changeOrigin": true
+    }
+}
+
+
+    
